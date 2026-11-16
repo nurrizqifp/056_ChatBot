@@ -17,6 +17,12 @@ app.post("/api/chat", async (req, res) => {
     try {
         const messages = req.body.messages;
 
+        if (!messages || !Array.isArray(messages)) {
+            return res.status(400).json({
+                error: "Messages harus berupa array"
+            });
+        }
+
     } catch (error) {
         console.error("Server Error:", error);
     }
