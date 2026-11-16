@@ -24,7 +24,7 @@ app.post("/api/chat", async (req, res) => {
         }
 
         const response = await fetch(
-            "https://openrouter.ai",
+            "https://openrouter.ai/api/v1/chat/completions",
             {
                 method: "POST",
                 headers: {
@@ -131,6 +131,11 @@ app.post("/api/chat", async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server berjalan di http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    const port = process.env.PORT || PORT;
+    app.listen(port, () => {
+        console.log(`Server berjalan di http://localhost:${port}`);
+    });
+}
+
+module.exports = app;
